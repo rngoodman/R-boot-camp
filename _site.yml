@@ -4,8 +4,8 @@ navbar:
   title: "R Bootcamp"
   left:
     - text: "Getting Started"
-      href: Getting-Started.html
+      href: _site/Getting-Started.html
     - text: "R Basics"
-      href: R-Basics.html
+      href: _site/R-Basics.html
     - text: "Importing & Inspecting Data"
-      href: Importing-and-Inspecting-Data.html
+      href: _site/Importing-and-Inspecting-Data.html
