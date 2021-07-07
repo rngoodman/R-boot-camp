@@ -8,17 +8,29 @@ output: html_document
 
 ## What is R?
 
+\
+
 R is a statistical programming language, which enables uses to process data in a similar way to excel. However R runs on commands rather than points and clicks, that is you use your keyboard much more than your mouse. 
 
 Find out more about R from the [official website](https://www.r-project.org/about.html).
 
+
+\
+
 ## Installing R
+
+\
 
 R runs on UNIX/Linux, Windows and MacOS.
 
 To install R go to [the R project website](https://www.r-project.org/) and click on `download R`. It will then give you a choice of CRAN mirrors, just choose the location nearest to you. For example if I wanted to download R in Liverpool, United Kingdom, I would choose the CRAN mirror in [Imperial College London, UK](https://cran.ma.imperial.ac.uk/). 
 
+
+\
+
 ## R Studio 
+
+\
 
 While R can be used by itself without the need to install any additional software, there is one other thing worth downloading: R Studio. This is an Integrated Development Environment which basically means it makes it a whole lot easier to work with R. 
 
@@ -26,13 +38,21 @@ Once you have downloaded R, you can download R Studio from their [website](https
 
 All the work for this bootcamp will use RStudio with `R version 4.1.0 `. 
 
+\
+
 ## Starting in R
+
+\
 
 To start, open the R Studio app. 
 
 Start a new project by clicking `File` > `New Project...` > `New Directory` > `R bootcamp`, then choose where you would like to create this project on your computer. Click `Create Project` and away we go. 
 
+\
+
 ## Setting a Directory
+
+\
 
 In order to process data R, like any other programming language, needs to know where that data is. 
 

@@ -1,0 +1,40 @@
+---
+title: "Welcome to the R Bootcamp"
+output: html_document
+---
+
+\ 
+
+Find out more about R from the [official website](https://www.r-project.org/about.html).
+
+
+\
+
+
+### Installing R
+
+To install R go to [the R project website](https://www.r-project.org/).
+
+To install RStudio go to [the R Studio website](https://www.rstudio.com/)
+
+More information on installation can be found on the Getting Started Page. 
+
+\
+
+
+### What is covered in the Bootcamp? 
+
+* Basic Installation
+* R and R Studio 
+* R Basics
+* Vectors, Factors and Dataframes
+* Importing Data
+* Inspecting Data
+
+\
+\
+
+This course was designed by Richard Goodman (@Another-Goodman)
+
+
+
