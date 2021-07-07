@@ -3,6 +3,8 @@ name: "R Bootcamp"
 navbar:
   title: "R Bootcamp"
   left:
+    - text: "Welcome"
+      href: _site/index.html
     - text: "Getting Started"
       href: _site/Getting-Started.html
     - text: "R Basics"
