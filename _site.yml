@@ -1,0 +1,11 @@
+outpur_dir: "."
+name: "R Bootcamp"
+navbar:
+  title: "R Bootcamp"
+  left:
+    - text: "Getting Started"
+      href: Getting-Started.html
+    - text: "R Basics"
+      href: R-Basics.html
+    - text: "Importing & Inspecting Data"
+      href: Importing-and-Inspecting-Data.html

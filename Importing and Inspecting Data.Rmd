@@ -1,0 +1,163 @@
+---
+title: "Importing and Inspecting Data"
+author: "Richard Goodman"
+output: html_document
+---
+
+\
+
+## Starting with Data
+
+First download the data into your `data` directory 
+*`url` is the internet URL
+*the `destfile` defines where the files will go in my working directory
+*`data/portal_data_joined.csv` will load the file into our data folder
+
+
+```{r, message=FALSE, results='hide'}
+
+download.file(url="https://ndownloader.figshare.com/files/2292169",
+              destfile = "data/portal_data_joined.csv")
+
+```
+
+Click on your data folder to check if its downloaded
+
+\
+
+## Reading Data into R
+
+Next read the data into R, we can do this through a number of different functions, `read.csv()` if it is a .csv file, or `read.table()` specifying the separation with the `sep=` argument (whether tsv; tab separated or csv; comma separated). Check the filetype you have downloaded and use appropriate function. 
+
+```{r, message=FALSE, results='hide'}
+
+surveys = read.csv(file = "data/portal_data_joined.csv")
+
+# the read.table fucntion would also work with the separation argument as ,
+surveys = read.table(file="data/portal_data_joined.csv", sep=",", header=TRUE)
+
+```
+
+
+\
+
+# Inspecting data frame objects 
+
+There are lots of ways we can inspect the data once we have loaded it into R. We can check the whole dataset, this is often not advised because it can print off many thousands or rows (or columns). Instead we can check the size of the dataframe, the first 10 or last 10 rows. We can also look at the column and row names and summarize the entire table. 
+
+```{r, message=FALSE, results='hide'}
+
+# Checking the data 
+surveys # the whole datase (won't print it all)
+# View(surveys) # opens a new tab with the dataset 
+
+# Checking the size of the data 
+dim(surveys) #find the dimensions of your data frame
+nrow(surveys) #find the number of rows
+ncol(surveys) # find the number of columns
+
+# Checking the content of the data 
+head(surveys) # view the first few rows only
+tail(surveys) # view the last six rows
+
+# Checking the names
+names(surveys) # returns the column names (synonym of colnames() for data.frame objects)
+rownames(surveys) # returns the row names
+
+# Summarising the data 
+str(surveys) #get the structure of your data
+summary(surveys) # summary statistics for each column
+
+# To get the class of every column you could use apply 
+apply(surveys, 2, class)
+
+```
+
+
+\
+
+## Indexing and subsetting data frames 
+
+Numeric indexing of a dataframe
+
+```{r, message=FALSE, results='hide'}
+
+# numeric index = data[rows, columns]
+surveys[1, ] #first row 
+surveys[ ,1] #first column
+surveys[1,1] #first column and first row 
+surveys[1:10, 3] #rows 1 to 10 in column 3
+# take a subset
+surveys[c(1,5,7), c(1,4,8)] #takes three rows and three columns
+surveys[1:5, -7] #remove the 7th column
+```
+
+Name indexing of a dataframe 
+
+```{r, message=FALSE, results='hide'}
+
+# Name indexing 
+surveys[1:10 , "weight"]
+# a shortcut to select an entire column 
+surveys[, "taxa"]
+# Use the dollar sign $ to select a column
+surveys$taxa
+# subset by character
+surveys[5:13, c("record_id", "genus")] # subset rows 5 to 13 and the named columns
+
+```
+
+Logical indexing of a dataframe 
+
+```{r, message=FALSE, results='hide'}
+
+genus_neotoma = surveys[surveys$genus == "Neotoma", ]
+
+nrow(genus_neotoma)
+
+species_albigula = surveys[surveys$species == "albigula",]
+```
+
+\
+
+# Adavanced subsetting of data frames 
+
+```{r, message=FALSE, results='hide'}
+
+
+# To create a data.frame containing only the data in row 200 of the surveys dataset you can do this:
+
+surveys_200 = surveys[200, ]
+surveys_200
+
+# nrow() gives you the number of rows in a data.frame. You can use that number to pull out just the last row in the data frame
+nrow(surveys)
+surveys_last_row = surveys[34786, ]
+surveys_last_row
+
+# Using the tail function we can see if this is really the last row 
+surveys_last_row
+tail(surveys)
+
+# You can nest the functions to select the last row using nrow() instead of the row number.
+surveys_last_row = surveys[nrow(surveys), ]
+
+# Create a new data frame (surveys_last) from that last row.
+surveys_last = surveys[nrow(surveys), ]
+surveys_last
+
+# Use nrow() to extract the row that is in the middle of the data frame. 
+# Store the content of this row in an object named surveys_middle
+
+n_row = nrow(surveys)
+surveys_middle =surveys[n_row/2, ]
+
+# Combine nrow() with the - notation above to reproduce the behavior of head(surveys),
+# keeping just the first through 6th rows of the surveys dataset.
+
+head(surveys)
+surveys[-(7:n_row), ]
+
+```
+
+

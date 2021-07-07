@@ -1,0 +1,573 @@
+---
+title: "R Basics"
+author: "Richard Goodman"
+output: html_document
+---
+
+\
+
+## Knowing where you are 
+
+\
+
+Before you start make sure you have started a new project and know which directory you are working in. 
+
+Check R is working by printing Hello World (use brackets)
+
+```{r, message=FALSE, results='hide'}
+print("Hello World")
+```
+To check you're in the right place use 
+```{r, message=FALSE, results='hide'}
+getwd()
+```
+If you're in the wrong place use `setwd()` to change directory.
+
+\
+
+## Assignment
+
+\
+
+In R you can assign values to objects by using `=` or `<-`. This will save your object to the global environment. 
+
+```{r, message=FALSE, results='hide'}
+
+x <- 2 
+x = 2 
+
+y <- 5 
+y = 5
+
+# stay consistent either = or <-
+
+
+2+5
+x+y
+```
+
+To remove that object from the global environment you can use `rm()`
+
+```{r, message=FALSE, results='hide'}
+
+rm(x)
+rm(y)
+
+```
+
+
+Once you have assigned value to objects you can continue to use them in calculations. 
+
+```{r, message=FALSE, results='hide'}
+
+# Make a variable
+weight_kg = 55
+
+# print that variable 
+print(weight_kg)
+
+# Change weight from kg to grams
+weight_kg * 1000
+weight_g = weight_kg * 1000
+
+# assign a new value to weight_kg
+weight_kg = 57.5 
+weight_g = weight_kg * 1000
+
+```
+
+
+
+\
+
+## Comparing between values 
+
+\
+
+There is a set of standard operators that we can use to compare two numbers or objects, the results will return the Boolean values `TRUE` or `FALSE` 
+* `<` - Greater Than  and `<=` Greater than or equal to
+* `>` - Less Than and `<=` less than or equal to
+* `==` equal (`=` cannot be used since it assigns values)
+* `!=` not equal to
+
+```{r, message=FALSE, results='hide'}
+
+2==2 # Equal 
+
+2!=2 #Inequal 
+
+2 <= 2
+
+```
+
+
+\
+
+## Functions 
+
+\
+
+Functions execute a defined set of commands and automate a process 
+
+You need an input, the function which has a set of commands and you recieve an output
+
+For example the square root function is: 
+
+```{r, message=FALSE, results='hide'}
+
+sqrt(25)
+
+```
+
+
+we will use the round function, search in help for how to use 
+This will tell you the package, the arguments to use and how to use
+
+```{r, message=FALSE, results='hide'}
+
+?round
+
+# if there are several packages with the same package use:
+
+?base::round
+
+```
+
+Let's use the round function with pi:
+
+```{r, message=FALSE, results='hide'}
+
+# Define pi 
+pi = 3.142
+
+# Round to 2 decimal places
+round(pi, 2)
+
+# round to 0 decimal places as default (don't define the second argument of digits)
+round(pi)
+round(pi, 0)
+
+```
+
+When writing the arguments of functions we can use either named or unnamed arguments, generally if it's your first time using the function its best to 
+
+```{r, message=FALSE, results='hide'}
+
+# Example of named argments
+round(x = 3.142, digits = 2)
+
+# Example of unnamed argments
+round(3.142, 2)
+
+# If you name them you can change the order of arguments
+round(digits = 2, x = 3.142) ### this is the good practice 
+
+# Yet this won't work with no  
+round(2, 3.142) #wrong!
+
+# Make a variable called result so it can be saved into memory 
+result = round(x = 3.142, digits = 2)
+
+
+```
+
+If you can't find a function in help section use Google 
+
+\
+
+## Data Types 
+
+\
+
+```{r, message=FALSE, results='hide'}
+
+animal = "cat" # example of character, words or strings  
+status = TRUE # example of logical 
+weight = 50 # example of integar e.g. whole numbers
+pi = 3.142 #example of double or dbl
+
+```
+
+
+
+If you want to know the data type use the class() function 
+
+```{r, message=FALSE, results='hide'}
+
+vector = c(4,12,7,9)
+class(vector) #numeric
+
+```
+
+\
+
+## Data structures
+
+\
+
+Data in R can be structured in different ways such as vectors, factors and dataframes. 
+
+**Vector**: list of items of the same data type e.g. 4,6,9,12 
+
+```{r, message=FALSE, results='hide'}
+
+vector = c(4,12,7,9) # this is one directional list of items, everything in () is a function 
+
+```
+
+
+**Factor**: categorical data (has to be a character vector), not too popular in tidyverse
+
+
+```{r, message=FALSE, results='hide'}
+
+# First create a vector of some ordered data using c()
+mood = c("unhappy", "awesome", "ok", "awesome", "unhappy") 
+# Combine the ordered data together using factor()
+factor = factor(mood)
+
+```
+
+
+**data.frame**: contains tabular data - normally data is loaed into data.frame when reading in a file
+
+```{r, message=FALSE, results='hide'}
+# Create three vectors with the necessary information using c()
+employee <- c('John Doe','Peter Gynn','Jolie Hope')
+salary <- c(21000, 23400, 26800)
+startdate <- as.Date(c('2010-11-1','2008-3-25','2007-3-14'))
+# Combine the three vectors together as a dataframe using data.frame()
+employ_data_frame <- data.frame(employee, salary, startdate)
+```
+
+
+\
+
+## Vectors 
+
+\
+
+To create a vector we must always use the `c()` function, this combines their elements together. 
+
+Vectors can be either numbers or characters, but all the items must be the same datatype. 
+
+An example of integer vector would be 
+
+```{r, message=FALSE, results='hide'}
+
+weight_g = c(50,60,65,82) # num means numeric, both dbl and integar are numeric 
+
+```
+
+An example of character vector would be 
+ 
+```{r, message=FALSE, results='hide'}
+
+animals = c("mouse", "rat", "dog") # chr means character 
+
+```
+
+An example of logical vector would be 
+ 
+```{r, message=FALSE, results='hide'}
+
+logic = c(TRUE, FALSE, FALSE) 
+
+```
+
+
+We can then investigate the properties of the vector
+
+```{r, message=FALSE, results='hide'}
+
+# Find length of vector with the length() function 
+length(animals)
+length(weight_g)
+
+# str() fucntion checks the structure of yoru data 
+str(weight_g) # a numeric vector of 4 items
+str(animals) # a character vector of 3 items 
+
+# Adding extra items to a vector
+weight_g = c(weight_g, 90) # add 90 to end of vector 
+weight_g = c(30, weight_g) # add 30 to start of vector 
+
+# To add an item to a chosen point within the vector use the append() function
+append(x = vector, values = 10, after = 1) 
+# x is vector, values are the values to be included, after - after whcih the values will be appended
+
+# Working with heights  
+height_mm = c(100,150,99,87)
+total_height = sum(height_mm) # sum adds up all items in vector
+height_mm = c(220, height_mm)
+total_height = sum(height_mm)
+
+```
+
+
+To look for vector indices we can use `[]`
+
+
+```{r, message=FALSE, results='hide'}
+
+#get the second item from my vector 
+animals[2]
+#get the first and second
+animals[c(1,2)]
+# get multiple items - even repetitions
+animals[c(1,1,1,3,2,1,2,2)]
+
+```
+
+R indices start at 1 unlike other programming languages like Python which counts from 0
+
+
+\
+
+## Factors
+
+\
+
+
+Factors are categorical variables, they can de split into different types such as nominal, ordinal and binary. 
+
+```{r, message=FALSE, results='hide'}
+
+
+Nominal = c("turtle", "snail", "butterfly") # unordered descriptions
+Ordinal = c("small", "medium", "large") # ordered descriptions
+Binary = c("Extinct", "Existing") # only two mutually exclusive outcomes
+
+```
+
+
+Ordinal variables
+
+```{r, message=FALSE, results='hide'}
+# Create a vector containing chr describing mood 
+mood = c("unhappy", "awesome", "ok", "awesome", "unhappy") 
+
+```
+
+Convert mood vector to a factor 
+
+```{r, message=FALSE, results='hide'}
+factor(mood)
+mood = factor(mood)
+# factors can only contain pre-defined levels 
+# R orders factors in alphabetical order 
+
+#Re-order levels in a factor
+factor(mood, levels = c("unhappy", "okay", "awesome"))
+```
+
+
+
+
+\
+
+## Dataframes
+
+\
+
+Dataframes are a type of list used to store datasets as tables. The rows are cases and columns are variables, therefore a column can either be a vector or a factor. So we can build a dataframe from the vectors upwards. 
+
+Dataframes can be created using the `data.frame()` function 
+
+```{r, message=FALSE, results='hide'}
+
+# Create three vectors with the necessary information using c()
+
+name <- c('John','Peter','Jolie')
+gender <- c('M', 'M', 'F')
+age <- c(22, 42, 57)
+
+# Combine the three vectors together as a dataframe using data.frame()
+
+people_data_frame <- data.frame(name, gender, age)
+
+
+```
+
+To access aspects of the dataframe we can use `$` to subset a dataframe by name 
+
+
+```{r, message=FALSE, results='hide'}
+
+people_data_frame$name # first column
+people_data_frame$gender # second column 
+people_data_frame$age # third column 
+
+
+```
+
+There is more information on working with dataframes in `Importing and Inspecting Data`
+
+
+
+
+\
+
+## Conditional subsetting 
+
+\
+
+We can subset a vector by using a logical vector. 
+`TRUE` will select the element with the same index, while `FALSE` will not. 
+
+
+```{r, message=FALSE, results='hide'}
+
+# which values in weight_g are less than 60
+
+# R asks each item in the vector - "are you less than 60?"
+c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)
+# Apply this to the weight_g vector
+weight_g[c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)]
+# We computed this ourselves as to whne the condition was and wasn't met
+
+# Now let R compute it automatically
+weight_g < 60 
+
+```
+
+
+Now to get the values as an answer, without the `[]` I will not get the values 
+Automatic way to get results from queries 
+
+```{r, message=FALSE, results='hide'}
+weight_g[weight_g < 60] # greater than 60 
+```
+
+
+
+Other ways to subset conditonally include
+
+```{r, message=FALSE, results='hide'}
+weight_g[weight_g <= 60] # greater than or equal to 60 
+weight_g[weight_g == 60] # equal to 60
+weight_g[weight_g > 60] # less than 60
+weight_g[weight_g >= 60] # less than or equal to 60
+```
+
+
+As well as `TRUE` and `FALSE` we can use other logical expression such as `&`, `|` and `&in%`.  
+
+
+**using AND `&`**
+
+Both conditions must be true to allow TRUE 
+Select values less than 80 and greater than 50 
+
+```{r}
+
+weight_g[weight_g < 80 & weight_g > 50]
+
+```
+
+**using OR `|`**
+
+If one condition is true it will allow TRUE
+
+```{r}
+weight_g[weight_g < 80 | weight_g > 50]
+```
+
+These are useful for filtering data 
+
+To check if an item is present in a character list 
+
+```{r, message=FALSE, results='hide'}
+animals[animals == "rat"]
+animals[animals == "cat"] # character(0) means no cat found in vector
+```
+
+
+
+**using `%in%`**
+
+The `%in%` in operator can be used for character data only
+
+This can be used to look for 100 significnat genes in a type II diabetes gene list of 100 genes
+
+
+```{r, message=FALSE, results='hide'}
+animals %in% c("rat", "dog") # see if two items are present 
+animals[animals %in% c("rat", "dog")]
+```
+
+
+
+As an alterantive to the %in% operator we can use the intersect() function 
+
+```{r, message=FALSE, results='hide'}
+
+intersect(animals, c("rat"))
+intersect(animals, c("rat", "dog")) 
+
+```
+
+       
+
+\
+
+## Dealing with missing Data ####
+
+\
+
+```{r, message=FALSE, results='hide'}
+
+heights = c(3, 5, 8, 12, 6)
+
+# introducing missing values
+heights = c(3, 5, 8, 12, 6, NA)
+
+```
+
+
+
+```{r, message=FALSE, results='hide'}
+
+# calculate the mean (average of heights)
+mean(heights) #NA is returned
+mean(heights, na.rm = TRUE) # to remove missing values use na.rm 
+min(heights, na.rm = TRUE)
+
+```
+
+
+
+
+We can remove missing values from the vector in several ways.
+
+
+We can use `na.omit`
+
+```{r, message=FALSE, results='hide'}
+na.omit(heights) #removes all NAs in object
+heights_no_na = na.omit(heights)
+```
+
+
+We can use `is.na()` and the `!` operator
+
+```{r, message=FALSE, results='hide'}
+is.na(heights) # returns logical 
+!is.na(heights) # to negate the is.na function use ! - so find all things that aren't missing
+heights[] #open up heights
+heights[!is.na(heights)] # find all values in heights which are not NAs using the negating ! operation
+heights_no_na = heights[!is.na(heights)]
+```
+
+
+
+We can also use `complete.cases`
+
+```{r, message=FALSE, results='hide'}
+heights[complete.cases(heights)]
+heights_no_na = heights[complete.cases(heights)]
+```
+
+
+
+
