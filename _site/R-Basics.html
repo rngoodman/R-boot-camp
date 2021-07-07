@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Richard Goodman" />
+
+
+<title>R Basics</title>
+
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R Bootcamp</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Getting-Started.html">Getting Started</a>
+</li>
+<li>
+  <a href="R-Basics.html">R Basics</a>
+</li>
+<li>
+  <a href="Importing-and-Inspecting-Data.html">Importing &amp; Inspecting Data</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">R Basics</h1>
+<h4 class="author">Richard Goodman</h4>
+
+</div>
+
+
+<p><br />
+</p>
+<div id="knowing-where-you-are" class="section level2">
+<h2>Knowing where you are</h2>
+<p><br />
+</p>
+<p>Before you start make sure you have started a new project and know which directory you are working in.</p>
+<p>Check R is working by printing Hello World (use brackets)</p>
+<pre class="r"><code>print(&quot;Hello World&quot;)</code></pre>
+<p>To check you’re in the right place use</p>
+<pre class="r"><code>getwd()</code></pre>
+<p>If you’re in the wrong place use <code>setwd()</code> to change directory.</p>
+<p><br />
+</p>
+</div>
+<div id="assignment" class="section level2">
+<h2>Assignment</h2>
+<p><br />
+</p>
+<p>In R you can assign values to objects by using <code>=</code> or <code>&lt;-</code>. This will save your object to the global environment.</p>
+<pre class="r"><code>x &lt;- 2 
+x = 2 
+
+y &lt;- 5 
+y = 5
+
+# stay consistent either = or &lt;-
+
+
+2+5
+x+y</code></pre>
+<p>To remove that object from the global environment you can use <code>rm()</code></p>
+<pre class="r"><code>rm(x)
+rm(y)</code></pre>
+<p>Once you have assigned value to objects you can continue to use them in calculations.</p>
+<pre class="r"><code># Make a variable
+weight_kg = 55
+
+# print that variable 
+print(weight_kg)
+
+# Change weight from kg to grams
+weight_kg * 1000
+weight_g = weight_kg * 1000
+
+# assign a new value to weight_kg
+weight_kg = 57.5 
+weight_g = weight_kg * 1000</code></pre>
+<p><br />
+</p>
+</div>
+<div id="comparing-between-values" class="section level2">
+<h2>Comparing between values</h2>
+<p><br />
+</p>
+<p>There is a set of standard operators that we can use to compare two numbers or objects, the results will return the Boolean values <code>TRUE</code> or <code>FALSE</code> * <code>&lt;</code> - Greater Than and <code>&lt;=</code> Greater than or equal to * <code>&gt;</code> - Less Than and <code>&lt;=</code> less than or equal to * <code>==</code> equal (<code>=</code> cannot be used since it assigns values) * <code>!=</code> not equal to</p>
+<pre class="r"><code>2==2 # Equal 
+
+2!=2 #Inequal 
+
+2 &lt;= 2</code></pre>
+<p><br />
+</p>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p><br />
+</p>
+<p>Functions execute a defined set of commands and automate a process</p>
+<p>You need an input, the function which has a set of commands and you recieve an output</p>
+<p>For example the square root function is:</p>
+<pre class="r"><code>sqrt(25)</code></pre>
+<p>we will use the round function, search in help for how to use This will tell you the package, the arguments to use and how to use</p>
+<pre class="r"><code>?round
+
+# if there are several packages with the same package use:
+
+?base::round</code></pre>
+<p>Let’s use the round function with pi:</p>
+<pre class="r"><code># Define pi 
+pi = 3.142
+
+# Round to 2 decimal places
+round(pi, 2)
+
+# round to 0 decimal places as default (don&#39;t define the second argument of digits)
+round(pi)
+round(pi, 0)</code></pre>
+<p>When writing the arguments of functions we can use either named or unnamed arguments, generally if it’s your first time using the function its best to</p>
+<pre class="r"><code># Example of named argments
+round(x = 3.142, digits = 2)
+
+# Example of unnamed argments
+round(3.142, 2)
+
+# If you name them you can change the order of arguments
+round(digits = 2, x = 3.142) ### this is the good practice 
+
+# Yet this won&#39;t work with no  
+round(2, 3.142) #wrong!
+
+# Make a variable called result so it can be saved into memory 
+result = round(x = 3.142, digits = 2)</code></pre>
+<p>If you can’t find a function in help section use Google</p>
+<p><br />
+</p>
+</div>
+<div id="data-types" class="section level2">
+<h2>Data Types</h2>
+<p><br />
+</p>
+<pre class="r"><code>animal = &quot;cat&quot; # example of character, words or strings  
+status = TRUE # example of logical 
+weight = 50 # example of integar e.g. whole numbers
+pi = 3.142 #example of double or dbl</code></pre>
+<p>If you want to know the data type use the class() function</p>
+<pre class="r"><code>vector = c(4,12,7,9)
+class(vector) #numeric</code></pre>
+<p><br />
+</p>
+</div>
+<div id="data-structures" class="section level2">
+<h2>Data structures</h2>
+<p><br />
+</p>
+<p>Data in R can be structured in different ways such as vectors, factors and dataframes.</p>
+<p><strong>Vector</strong>: list of items of the same data type e.g. 4,6,9,12</p>
+<pre class="r"><code>vector = c(4,12,7,9) # this is one directional list of items, everything in () is a function </code></pre>
+<p><strong>Factor</strong>: categorical data (has to be a character vector), not too popular in tidyverse</p>
+<pre class="r"><code># First create a vector of some ordered data using c()
+mood = c(&quot;unhappy&quot;, &quot;awesome&quot;, &quot;ok&quot;, &quot;awesome&quot;, &quot;unhappy&quot;) 
+# Combine the ordered data together using factor()
+factor = factor(mood)</code></pre>
+<p><strong>data.frame</strong>: contains tabular data - normally data is loaed into data.frame when reading in a file</p>
+<pre class="r"><code># Create three vectors with the necessary information using c()
+employee &lt;- c(&#39;John Doe&#39;,&#39;Peter Gynn&#39;,&#39;Jolie Hope&#39;)
+salary &lt;- c(21000, 23400, 26800)
+startdate &lt;- as.Date(c(&#39;2010-11-1&#39;,&#39;2008-3-25&#39;,&#39;2007-3-14&#39;))
+# Combine the three vectors together as a dataframe using data.frame()
+employ_data_frame &lt;- data.frame(employee, salary, startdate)</code></pre>
+<p><br />
+</p>
+</div>
+<div id="vectors" class="section level2">
+<h2>Vectors</h2>
+<p><br />
+</p>
+<p>To create a vector we must always use the <code>c()</code> function, this combines their elements together.</p>
+<p>Vectors can be either numbers or characters, but all the items must be the same datatype.</p>
+<p>An example of integer vector would be</p>
+<pre class="r"><code>weight_g = c(50,60,65,82) # num means numeric, both dbl and integar are numeric </code></pre>
+<p>An example of character vector would be</p>
+<pre class="r"><code>animals = c(&quot;mouse&quot;, &quot;rat&quot;, &quot;dog&quot;) # chr means character </code></pre>
+<p>An example of logical vector would be</p>
+<pre class="r"><code>logic = c(TRUE, FALSE, FALSE) </code></pre>
+<p>We can then investigate the properties of the vector</p>
+<pre class="r"><code># Find length of vector with the length() function 
+length(animals)
+length(weight_g)
+
+# str() fucntion checks the structure of yoru data 
+str(weight_g) # a numeric vector of 4 items
+str(animals) # a character vector of 3 items 
+
+# Adding extra items to a vector
+weight_g = c(weight_g, 90) # add 90 to end of vector 
+weight_g = c(30, weight_g) # add 30 to start of vector 
+
+# To add an item to a chosen point within the vector use the append() function
+append(x = vector, values = 10, after = 1) 
+# x is vector, values are the values to be included, after - after whcih the values will be appended
+
+# Working with heights  
+height_mm = c(100,150,99,87)
+total_height = sum(height_mm) # sum adds up all items in vector
+height_mm = c(220, height_mm)
+total_height = sum(height_mm)</code></pre>
+<p>To look for vector indices we can use <code>[]</code></p>
+<pre class="r"><code>#get the second item from my vector 
+animals[2]
+#get the first and second
+animals[c(1,2)]
+# get multiple items - even repetitions
+animals[c(1,1,1,3,2,1,2,2)]</code></pre>
+<p>R indices start at 1 unlike other programming languages like Python which counts from 0</p>
+<p><br />
+</p>
+</div>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
+<p><br />
+</p>
+<p>Factors are categorical variables, they can de split into different types such as nominal, ordinal and binary.</p>
+<pre class="r"><code>Nominal = c(&quot;turtle&quot;, &quot;snail&quot;, &quot;butterfly&quot;) # unordered descriptions
+Ordinal = c(&quot;small&quot;, &quot;medium&quot;, &quot;large&quot;) # ordered descriptions
+Binary = c(&quot;Extinct&quot;, &quot;Existing&quot;) # only two mutually exclusive outcomes</code></pre>
+<p>Ordinal variables</p>
+<pre class="r"><code># Create a vector containing chr describing mood 
+mood = c(&quot;unhappy&quot;, &quot;awesome&quot;, &quot;ok&quot;, &quot;awesome&quot;, &quot;unhappy&quot;) </code></pre>
+<p>Convert mood vector to a factor</p>
+<pre class="r"><code>factor(mood)
+mood = factor(mood)
+# factors can only contain pre-defined levels 
+# R orders factors in alphabetical order 
+
+#Re-order levels in a factor
+factor(mood, levels = c(&quot;unhappy&quot;, &quot;okay&quot;, &quot;awesome&quot;))</code></pre>
+<p><br />
+</p>
+</div>
+<div id="dataframes" class="section level2">
+<h2>Dataframes</h2>
+<p><br />
+</p>
+<p>Dataframes are a type of list used to store datasets as tables. The rows are cases and columns are variables, therefore a column can either be a vector or a factor. So we can build a dataframe from the vectors upwards.</p>
+<p>Dataframes can be created using the <code>data.frame()</code> function</p>
+<pre class="r"><code># Create three vectors with the necessary information using c()
+
+name &lt;- c(&#39;John&#39;,&#39;Peter&#39;,&#39;Jolie&#39;)
+gender &lt;- c(&#39;M&#39;, &#39;M&#39;, &#39;F&#39;)
+age &lt;- c(22, 42, 57)
+
+# Combine the three vectors together as a dataframe using data.frame()
+
+people_data_frame &lt;- data.frame(name, gender, age)</code></pre>
+<p>To access aspects of the dataframe we can use <code>$</code> to subset a dataframe by name</p>
+<pre class="r"><code>people_data_frame$name # first column
+people_data_frame$gender # second column 
+people_data_frame$age # third column </code></pre>
+<p>There is more information on working with dataframes in <code>Importing and Inspecting Data</code></p>
+<p><br />
+</p>
+</div>
+<div id="conditional-subsetting" class="section level2">
+<h2>Conditional subsetting</h2>
+<p><br />
+</p>
+<p>We can subset a vector by using a logical vector. <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not.</p>
+<pre class="r"><code># which values in weight_g are less than 60
+
+# R asks each item in the vector - &quot;are you less than 60?&quot;
+c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)
+# Apply this to the weight_g vector
+weight_g[c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)]
+# We computed this ourselves as to whne the condition was and wasn&#39;t met
+
+# Now let R compute it automatically
+weight_g &lt; 60 </code></pre>
+<p>Now to get the values as an answer, without the <code>[]</code> I will not get the values Automatic way to get results from queries</p>
+<pre class="r"><code>weight_g[weight_g &lt; 60] # greater than 60 </code></pre>
+<p>Other ways to subset conditonally include</p>
+<pre class="r"><code>weight_g[weight_g &lt;= 60] # greater than or equal to 60 
+weight_g[weight_g == 60] # equal to 60
+weight_g[weight_g &gt; 60] # less than 60
+weight_g[weight_g &gt;= 60] # less than or equal to 60</code></pre>
+<p>As well as <code>TRUE</code> and <code>FALSE</code> we can use other logical expression such as <code>&amp;</code>, <code>|</code> and <code>&amp;in%</code>.</p>
+<p><strong>using AND <code>&amp;</code></strong></p>
+<p>Both conditions must be true to allow TRUE Select values less than 80 and greater than 50</p>
+<pre class="r"><code>weight_g[weight_g &lt; 80 &amp; weight_g &gt; 50]</code></pre>
+<pre><code>## [1] 60 65</code></pre>
+<p><strong>using OR <code>|</code></strong></p>
+<p>If one condition is true it will allow TRUE</p>
+<pre class="r"><code>weight_g[weight_g &lt; 80 | weight_g &gt; 50]</code></pre>
+<pre><code>## [1] 30 50 60 65 82 90</code></pre>
+<p>These are useful for filtering data</p>
+<p>To check if an item is present in a character list</p>
+<pre class="r"><code>animals[animals == &quot;rat&quot;]
+animals[animals == &quot;cat&quot;] # character(0) means no cat found in vector</code></pre>
+<p><strong>using <code>%in%</code></strong></p>
+<p>The <code>%in%</code> in operator can be used for character data only</p>
+<p>This can be used to look for 100 significnat genes in a type II diabetes gene list of 100 genes</p>
+<pre class="r"><code>animals %in% c(&quot;rat&quot;, &quot;dog&quot;) # see if two items are present 
+animals[animals %in% c(&quot;rat&quot;, &quot;dog&quot;)]</code></pre>
+<p>As an alterantive to the %in% operator we can use the intersect() function</p>
+<pre class="r"><code>intersect(animals, c(&quot;rat&quot;))
+intersect(animals, c(&quot;rat&quot;, &quot;dog&quot;)) </code></pre>
+<p><br />
+</p>
+</div>
+<div id="dealing-with-missing-data" class="section level2">
+<h2>Dealing with missing Data</h2>
+<p><br />
+</p>
+<pre class="r"><code>heights = c(3, 5, 8, 12, 6)
+
+# introducing missing values
+heights = c(3, 5, 8, 12, 6, NA)</code></pre>
+<pre class="r"><code># calculate the mean (average of heights)
+mean(heights) #NA is returned
+mean(heights, na.rm = TRUE) # to remove missing values use na.rm 
+min(heights, na.rm = TRUE)</code></pre>
+<p>We can remove missing values from the vector in several ways.</p>
+<p>We can use <code>na.omit</code></p>
+<pre class="r"><code>na.omit(heights) #removes all NAs in object
+heights_no_na = na.omit(heights)</code></pre>
+<p>We can use <code>is.na()</code> and the <code>!</code> operator</p>
+<pre class="r"><code>is.na(heights) # returns logical 
+!is.na(heights) # to negate the is.na function use ! - so find all things that aren&#39;t missing
+heights[] #open up heights
+heights[!is.na(heights)] # find all values in heights which are not NAs using the negating ! operation
+heights_no_na = heights[!is.na(heights)]</code></pre>
+<p>We can also use <code>complete.cases</code></p>
+<pre class="r"><code>heights[complete.cases(heights)]
+heights_no_na = heights[complete.cases(heights)]</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
