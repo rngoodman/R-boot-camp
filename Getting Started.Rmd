@@ -57,6 +57,7 @@ Start a new project by clicking `File` > `New Project...` > `New Directory` > `R
 In order to process data R, like any other programming language, needs to know where that data is. 
 
 Therefore before we start we need to know two things 
+
 * Which directory (or folder) are we working from in R?
 * Which directory (or folder) is the data in?
 
