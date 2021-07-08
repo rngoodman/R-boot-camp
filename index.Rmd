@@ -5,6 +5,8 @@ output: html_document
 
 \ 
 
+This short course looks at the basics of the R programming language to get you up and running on R.
+
 Find out more about R from the [official website](https://www.r-project.org/about.html).
 
 
@@ -36,5 +38,5 @@ More information on installation can be found on the [Getting Started Page](http
 
 This course was designed by Richard Goodman (@Another-Goodman)
 
-
+The Github repository can be found [here](https://github.com/Another-Goodman/R-boot-camp). 
 
