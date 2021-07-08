@@ -6,5 +6,5 @@ Check out the webpage [here](https://another-goodman.github.io/R-boot-camp/index
 
 This bootcamp covers the following:
 * [Installation of R & R Studio](https://another-goodman.github.io/R-boot-camp/Getting-Started.html) 
-* [The Basics of R](https://another-goodman.github.io/R-boot-camp/R-Basics.html)
-* [Reading in Data and INspecting its contents](https://another-goodman.github.io/R-boot-camp/Importing-and-Inspecting-Data.html)
+* [The basics of R](https://another-goodman.github.io/R-boot-camp/R-Basics.html)
+* [Reading in data and inspecting its contents](https://another-goodman.github.io/R-boot-camp/Importing-and-Inspecting-Data.html)
