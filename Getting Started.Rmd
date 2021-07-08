@@ -63,6 +63,7 @@ Therefore before we start we need to know two things
 Since we have already started a project we can make this much simpler. 
 
 In RStudio to your right there is a button saying `New Folder`. Create the following new folders in your directory:
+
 * `data/`
 * `data_output/`
 * `img_output/` 
