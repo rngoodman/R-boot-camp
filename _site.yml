@@ -1,13 +1,13 @@
-outpur_dir: "."
+outpur_dir: "./_site/"
 name: "R Bootcamp"
 navbar:
   title: "R Bootcamp"
   left:
     - text: "Welcome"
-      href: _site/index.html
+      href: index.html
     - text: "Getting Started"
-      href: _site/Getting-Started.html
+      href: Getting-Started.html
     - text: "R Basics"
-      href: _site/R-Basics.html
+      href: R-Basics.html
     - text: "Importing & Inspecting Data"
-      href: _site/Importing-and-Inspecting-Data.html
+      href: Importing-and-Inspecting-Data.html
