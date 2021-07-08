@@ -10,7 +10,7 @@ output: html_document
 
 \
 
-R is a statistical programming language, which enables uses to process data in a similar way to excel. However R runs on commands rather than points and clicks, that is you use your keyboard much more than your mouse. 
+R is a statistical programming language, which enables users to process data in a similar way to excel. However R runs on commands rather than points and clicks, that is you use your keyboard much more than your mouse. 
 
 Find out more about R from the [official website](https://www.r-project.org/about.html).
 
@@ -32,7 +32,7 @@ To install R go to [the R project website](https://www.r-project.org/) and click
 
 \
 
-While R can be used by itself without the need to install any additional software, there is one other thing worth downloading: R Studio. This is an Integrated Development Environment which basically means it makes it a whole lot easier to work with R. 
+While R can be used by itself without the need to install any additional software, there is one other thing worth downloading: [R Studio](https://www.rstudio.com/). This is an Integrated Development Environment which basically means it makes it a whole lot easier to work with R. 
 
 Once you have downloaded R, you can download R Studio from their [website](https://www.rstudio.com/). Their open source version is free. 
 

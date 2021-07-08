@@ -120,7 +120,7 @@ species_albigula = surveys[surveys$species == "albigula",]
 
 \
 
-# Adavanced subsetting of data frames 
+# Advanced subsetting of data frames 
 
 ```{r, message=FALSE, results='hide'}
 
