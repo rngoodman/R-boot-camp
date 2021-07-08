@@ -1,10 +1,13 @@
 outpur_dir: "."
-name: "R Bootcamp"
+output:
+  html_document:
+    highlight: pygments
+    toc: true
+    toc_float:
+      collapsed: false
 navbar:
   title: "R Bootcamp"
   left:
-    - text: "Welcome"
-      href: _site/index.html
     - text: "Getting Started"
       href: _site/Getting-Started.html
     - text: "R Basics"
