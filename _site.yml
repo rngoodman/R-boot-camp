@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 outpur_dir: "."
 output:
   html_document:
@@ -8,9 +9,18 @@ output:
 navbar:
   title: "R Bootcamp"
   left:
+=======
+outpur_dir: "./_site/"
+name: "R Bootcamp"
+navbar:
+  title: "R Bootcamp"
+  left:
+    - text: "Welcome"
+      href: index.html
+>>>>>>> f27ec5a546a8cb379a92277e2811d91c953f9e73
     - text: "Getting Started"
-      href: _site/Getting-Started.html
+      href: Getting-Started.html
     - text: "R Basics"
-      href: _site/R-Basics.html
+      href: R-Basics.html
     - text: "Importing & Inspecting Data"
-      href: _site/Importing-and-Inspecting-Data.html
+      href: Importing-and-Inspecting-Data.html
