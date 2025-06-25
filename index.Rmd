@@ -36,7 +36,8 @@ More information on installation can be found on the [Getting Started Page](http
 \
 \
 
-This course was designed by Richard Goodman (@Another-Goodman)
+This course was designed by Richard Goodman (@rngoodman)
 
-The Github repository can be found [here](https://github.com/Another-Goodman/R-boot-camp). 
+The Github repository can be found [here](https://github.com/rngoodman/R-boot-camp). 
+ 
 
